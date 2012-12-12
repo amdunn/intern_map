@@ -1,0 +1,11 @@
+{
+    "name": "Facebook Location Grabber",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["https://www.facebook.com/*"],
+            "js": ["jquery-1.8.2.min.js", "fb.js"]
+        }
+    ]
+}
