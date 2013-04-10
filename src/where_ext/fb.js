@@ -1,27 +1,26 @@
 function find_where_lives() {
-    var about_box = $('li[class~="about"]');
-    if (about_box.length != 1)
-        throw "fail: 1";
+    /* Not 100% sure what the _4_ug box is, but this seems to work */
+    var boxes = $('div[role="article"] li[class="_4_ug"]');
+    var result = null;
 
-    /* Lines in profile (e.g. "Lives in ...") */
-    var profile_lines = $('span[class="fbProfileBylineLabel"]', about_box[0]);
-    if (profile_lines.length == 0)
-        throw "fail: 2";
+    if (boxes.length == 0) {
+        throw "fail: no boxes found";
+    }
 
-    var result = false;
-    profile_lines.each(function() {
+    boxes.each(function (idx) {
         var html = this.innerHTML;
 
-        if (html.search("Lives") != -1) {
+        if (html.search("Lives in") != -1 &&
+            result === null) {
             result = html;
-            return;
         }
     });
 
-    if (!(result === false))
+    if (!(result === null)) {
         return result;
+    }
 
-    throw "fail: 3";
+    throw "fail: no lives in box found";
 }
 
 $(document).ready(function() {
