@@ -5,13 +5,18 @@ import subprocess
 import sqlite3
 import time
 import os
+import codecs
 
 from conf import chrome_local_storage_db
 
 options = {}
 
+# Write a string to a file.  We encode the output as UTF-8, with the
+# idea that the other side probably is OK with this encoding.  Not
+# doing this can cause an error when redirecting the output (as we
+# want to do), e.g. can try to interpret codepoint as ascii.
 def out(msg):
-    sys.stdout.write(msg)
+    sys.stdout.write(codecs.encode(msg, 'utf-8'))
     sys.stdout.flush()
 
 def parse_args(args):
