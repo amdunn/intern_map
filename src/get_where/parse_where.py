@@ -17,7 +17,7 @@ def parse_args(args):
 parse_location_re = re.compile("id=(\d+)")
 
 def parse_location(s):
-    if s.find('<a href') != -1:
+    if s.find('<a') != -1:
         m = parse_location_re.search(s)
         return int(m.group(1))
     return s
